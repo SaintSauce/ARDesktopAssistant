@@ -24,6 +24,7 @@ class HandTracker():
 
         # drawing utilities
         self.mpDraw = mp.solutions.drawing_utils
+        self.tipIds = [4, 8, 12, 16, 20]
 
     def findHands(self, img, draw=True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # convert BGR to RGB
@@ -43,7 +44,7 @@ class HandTracker():
         return img
 
     def findPosition(self, img, handNo=0, draw=True):
-        landmark_list = []
+        self.landmark_list = []
 
         if self.results.multi_hand_landmarks:
             newHand = self.results.multi_hand_landmarks[handNo]
@@ -52,14 +53,31 @@ class HandTracker():
                 height, width, channel = img.shape
                 center_x, center_y = int(landmark.x * width), int(landmark.y * height)
                 # print(id, center_x, center_y)
-                landmark_list.append([id, center_x, center_y])
+                self.landmark_list.append([id, center_x, center_y])
 
                 if draw:
                     cv2.circle(img, (center_x, center_y), 15,
                                (0, 0, 255), cv2.FILLED)
 
-        return landmark_list
+        return self.landmark_list
 
+    def fingersUp(self):
+        fingers = []
+
+        # thumb
+        if self.landmark_list[self.tipIds[0]][1] < self.landmark_list[self.tipIds[0] - 1][1]:
+            fingers.append(1)
+        else:
+            fingers.append(0)
+
+        # 4 fingers
+        for id in range(1, 5):
+            if self.landmark_list[self.tipIds[id]][2] < self.landmark_list[self.tipIds[id] - 2][2]:
+                fingers.append(1)
+            else:
+                fingers.append(0)
+
+        return fingers
 
 def main():
     # calculate framerate

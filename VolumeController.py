@@ -23,14 +23,14 @@ else:
 
 print(f'You are currently running this program on {current_os}')
 
-camera_width, camera_height = 640, 480
+camera_width, camera_height = 1920, 1080
 
 cap = cv2.VideoCapture(0)
 cap.set(3, camera_width)
 cap.set(4, camera_height)
 prev_time = 0
 
-detector = ht.HandTracker()
+detector = ht.HandTracker(detectionConfidence=0.8)
 
 """ FOR WINDOWS """
 # if os_name == "Windows":
