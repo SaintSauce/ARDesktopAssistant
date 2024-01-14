@@ -1,4 +1,4 @@
-Accomplish basic tasks in your operating system using your real-life hands.
+Enhance your virtual experience with an augmented reality (AR) assistant using computer vision to accomplish tasks for OS Desktop Interfaces.
 
 Features
 - Volume control (only works on macOS for now)
