@@ -1,4 +1,5 @@
-Enhance your virtual experience with an augmented reality (AR) assistant using computer vision to accomplish tasks for OS Desktop Interfaces.
+Enhance your virtual experience with an augmented reality (AR) assistant using 
+computer vision and machine learning to accomplish tasks for OS Desktop Interfaces
 
 Features
 - Volume control (only works on macOS for now)
